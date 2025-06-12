@@ -1,11 +1,10 @@
-import os
 import time
 import pytz
 import yfinance as yf
 import pandas as pd
-import matplotlib.pyplot as plt
 from pushbullet import Pushbullet
 from datetime import datetime, timedelta
+import sys
 
 # === Setup ===
 os.chdir(r"C:\Users\beren\OneDrive\Notebook\Sujet\Stocks")
@@ -48,7 +47,6 @@ def fetch_data():
     return df
 
 def run_strategy(df):
-    import sys
     pb.push_note("Running strategy", "Started running the strategy.")
     results = []
     unique_dates = sorted(df['date'].unique())

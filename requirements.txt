@@ -1,0 +1,4 @@
+pytz
+yfinance
+pandas
+pushbullet.py
