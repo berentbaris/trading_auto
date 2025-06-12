@@ -2,12 +2,15 @@ name: Scheduled Python Script
 
 on:
   schedule:
-    - cron: '0 * * * *'  # every hour UTC
+    - cron: '50 13 * * 1-5'  # 9:50 AM ET (13:50 UTC) Mon–Fri
   workflow_dispatch:
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
+    env:
+      PUSHBULLET_TOKEN: ${{ secrets.PUSHBULLET_TOKEN }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -20,8 +23,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Wait 1 second (for 9:50:01 timing)
+        run: sleep 1
+
       - name: Run script
         run: python orb_daily.py
-
-env:
-  PUSHBULLET_TOKEN: ${{ secrets.PUSHBULLET_TOKEN }}
