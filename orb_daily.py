@@ -5,9 +5,9 @@ import pandas as pd
 from pushbullet import Pushbullet
 from datetime import datetime, timedelta
 import sys
+import os
 
 # === Setup ===
-os.chdir(r"C:\Users\beren\OneDrive\Notebook\Sujet\Stocks")
 token = os.getenv("PUSHBULLET_TOKEN")
 pb = Pushbullet(token)
 cet = pytz.timezone("Europe/Amsterdam")
