@@ -9,7 +9,8 @@ from datetime import datetime, timedelta
 
 # === Setup ===
 os.chdir(r"C:\Users\beren\OneDrive\Notebook\Sujet\Stocks")
-pb = Pushbullet("o.5TPBehreb5mt10fnLP6BndGNCgsIc4qa")
+token = os.getenv("PUSHBULLET_TOKEN")
+pb = Pushbullet(token)
 cet = pytz.timezone("Europe/Amsterdam")
 et = pytz.timezone("US/Eastern")
 pb.push_note("Script Started", "The trading script is now running.")

@@ -22,3 +22,6 @@ jobs:
 
       - name: Run script
         run: python orb_daily.py
+
+env:
+  PUSHBULLET_TOKEN: ${{ secrets.PUSHBULLET_TOKEN }}
