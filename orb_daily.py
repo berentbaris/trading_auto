@@ -155,7 +155,7 @@ def run_strategy(df):
         try:
             results.append({
                 'date': today, 'direction': direction, 'Datetime': entry_time,
-                'entry_price': entry_price, 'stop_loss': stop_loss
+                'entry_price': round(entry_price, 2), 'stop_loss': round(stop_loss, 2)
             })
         except Exception as e:
             print(f"PnL error on {today}: {e}")
@@ -165,7 +165,7 @@ def notify_trade(trade):
     if trade is not None and not trade.empty:
         last_trade = trade.iloc[-1]
         pb.push_note("New Trade Entry Detected",
-                     f"{last_trade['direction'].capitalize()} at {last_trade['entry_price']} on {last_trade['Datetime']}")
+                     f"{last_trade['direction'].capitalize()} at {last_trade['entry_price']} with stop loss at {last_trade['stop_loss']} on {last_trade['Datetime']}")
 
 # === Scheduler ===
 while True:
