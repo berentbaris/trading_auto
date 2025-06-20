@@ -23,9 +23,9 @@ def get_market_open_close():
     return market_open, market_close
 
 def fetch_data():
-    df = yf.download("QQQ", interval="5m", period="15d")
-    vix = yf.download("^VIX", interval="5m", period="15d")['Close']
-    xlu = yf.download("XLU", interval="5m", period="15d")['Close']
+    df = yf.download("QQQ", interval="5m", period="15d", auto_adjust=False)
+    vix = yf.download("^VIX", interval="5m", period="15d", auto_adjust=False)['Close']
+    xlu = yf.download("XLU", interval="5m", period="15d", auto_adjust=False)['Close']
     vix = vix.dropna()
 
     df.columns = df.columns.get_level_values(0)
