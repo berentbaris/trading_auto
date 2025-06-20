@@ -47,7 +47,7 @@ def fetch_data():
     return df
 
 def run_strategy(df):
-    pb.push_note("Running strategy", "Started running the strategy.")
+    pb.push_note("Running Strategy", f"Loop started at {datetime.now().strftime('%H:%M:%S')}")
     results = []
     unique_dates = sorted(df['date'].unique())
     if len(unique_dates) < 2:
@@ -169,6 +169,7 @@ def notify_trade(trade):
 
 # === Scheduler ===
 while True:
+    start = time.time()
     now_et = datetime.now(et)
     market_open, market_close = get_market_open_close()
     if market_open < now_et < market_close:
@@ -181,4 +182,5 @@ while True:
             print("Runtime Error:", e)
     else:
         print("Market closed. Waiting...")
-    time.sleep(300)  # 5 minutes
+    elapsed = time.time() - start
+    time.sleep(max(0, 300 - elapsed))
