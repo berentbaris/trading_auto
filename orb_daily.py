@@ -168,9 +168,16 @@ def notify_trade(trade):
                      f"{last_trade['direction'].capitalize()} at {last_trade['entry_price']} with stop loss at {last_trade['stop_loss']} on {last_trade['Datetime']}")
 
 # === Scheduler ===
+started = False
 while True:
     start = time.time()
     now_et = datetime.now(et)
+    if not started:
+        if now_et.hour == 9 and now_et.minute >= 50 and now_et.second >= 1:
+            started = True
+        else:
+            time.sleep(1)
+            continue
     market_open = now_et.replace(hour=9, minute=50, second=1, microsecond=0)
     market_close = now_et.replace(hour=15, minute=0, second=0, microsecond=0)
     if market_open < now_et < market_close:
