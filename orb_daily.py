@@ -12,7 +12,7 @@ token = os.getenv("PUSHBULLET_TOKEN")
 pb = Pushbullet(token)
 cet = pytz.timezone("Europe/Amsterdam")
 et = pytz.timezone("US/Eastern")
-pb.push_note("Script Started", "The trading script is now running.")
+pb.push_note("Script Started", f"Time: {datetime.now(cet).strftime('%H:%M:%S')}. Waiting until 15:50:01")
 
 # === Functions ===
 def get_market_open_close():
@@ -47,7 +47,7 @@ def fetch_data():
     return df
 
 def run_strategy(df):
-    pb.push_note("Running Strategy", f"Loop started at {datetime.now().strftime('%H:%M:%S')}")
+    pb.push_note("Running Strategy", f"Loop started at {datetime.now(cet).strftime('%H:%M:%S')}")
     results = []
     unique_dates = sorted(df['date'].unique())
     if len(unique_dates) < 2:
@@ -171,7 +171,8 @@ def notify_trade(trade):
 while True:
     start = time.time()
     now_et = datetime.now(et)
-    market_open, market_close = get_market_open_close()
+    market_open = now_et.replace(hour=9, minute=50, second=1, microsecond=0)
+    market_close = now_et.replace(hour=15, minute=0, second=0, microsecond=0)
     if market_open < now_et < market_close:
         try:
             df = fetch_data()
