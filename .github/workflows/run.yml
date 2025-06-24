@@ -2,7 +2,7 @@ name: Scheduled Python Script
 
 on:
   schedule:
-    - cron: '30 13 * * 1-5'  # 9:50 AM ET (13:50 UTC) Mon–Fri
+    - cron: '15 13 * * 1-5'  # 9:50 AM ET (13:50 UTC) Mon–Fri
   workflow_dispatch:
 
 jobs:

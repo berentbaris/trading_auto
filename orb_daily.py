@@ -179,12 +179,12 @@ while True:
             time.sleep(1)
             continue
     market_open = now_et.replace(hour=9, minute=50, second=1, microsecond=0)
-    market_close = now_et.replace(hour=15, minute=0, second=0, microsecond=0)
+    market_close = now_et.replace(hour=22, minute=0, second=0, microsecond=0)
     if market_open < now_et < market_close:
         try:
             df = fetch_data()
             trade_df = run_strategy(df)
-            if trade_df:
+            if trade_df is not None and not trade_df.empty:
                 notify_trade(trade_df)
         except Exception as e:
             print("Runtime Error:", e)
