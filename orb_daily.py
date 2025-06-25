@@ -133,7 +133,6 @@ def run_strategy(df):
 
     if direction == 'short' and opening_strength > 0.7:
         pb.push_note("Trade Blocked", f"No valid trade setup on {today.date()} — opening strength too high.")
-        sys.exit("Strategy terminated: Opening strength too high")
         
     if (direction == 'long' and not allow_long) or (direction == 'short' and not allow_short):
         pb.push_note("Trade Blocked", f"Breakout blocked by regime.")
@@ -176,7 +175,7 @@ while True:
         if now_et.hour == 9 and now_et.minute >= 50 and now_et.second >= 1:
             started = True
         else:
-            time.sleep(1)
+            time.sleep(10)
             continue
     market_open = now_et.replace(hour=9, minute=50, second=1, microsecond=0)
     market_close = now_et.replace(hour=22, minute=0, second=0, microsecond=0)
